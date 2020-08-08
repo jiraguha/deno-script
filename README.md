@@ -1,8 +1,8 @@
-# deno-script
+# deno-script 🦕
 [![Maturity badge - Experimental](https://img.shields.io/badge/Maturity-Experimental-yellow.svg)](https://github.com/jiraguha/deno-script/blob/master/maturity.md)
 
 
-Enhanced scripting support for JavaScript/TypeScript with Deno on *nix-based systems.
+Enhanced scripting support for JavaScript/TypeScript with Deno 🦕 on *nix-based systems.
 
 It is largely inspired by [kscript](https://github.com/holgerbrandl/kscript). The idea is to leverage the scripting abilities of javascript using [Deno](https://deno.land/).  
 
@@ -146,3 +146,6 @@ EOF
 
 
 We could continue and do much more…
+
+
+**Developed with for 🦕 with ❤️ **
