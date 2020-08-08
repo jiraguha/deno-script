@@ -148,4 +148,4 @@ EOF
 We could continue and do much more…
 
 
-**Developed with for 🦕 with ❤️ **
+**Developed with for 🦕 with ❤️**
