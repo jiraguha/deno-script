@@ -3,7 +3,10 @@
 
 
 Enhanced scripting support for JavaScript/TypeScript with Deno on *nix-based systems.
-It is largely inspired by [kscript](https://github.com/holgerbrandl/kscript). The idea is to leverage the scripting abilities of javascript using [Deno](https://deno.land/).  I feel that scripting can be so much fun with `Deno` as:
+
+It is largely inspired by [kscript](https://github.com/holgerbrandl/kscript). The idea is to leverage the scripting abilities of javascript using [Deno](https://deno.land/).  
+
+I feel that scripting can be so much fun with `Deno` as:
 
 - It can import modules from any location on the web,
 - It is secure by default. Imported module can run in sandbox.
