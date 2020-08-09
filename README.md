@@ -17,6 +17,21 @@ I feel that scripting can be so much fun with `Deno` as:
 - Installing deno.
 - Os: Mac, linux
 - Make sure that Deno is on the bin path
+## Installation
+
+If your are on `zsh`:
+```
+curl -sSL "https://raw.githubusercontent.com/jiraguha/deno-script/master/install.sh" | bash -s "master" "zsh" 
+
+```
+
+For others:
+```
+curl -sSL "https://raw.githubusercontent.com/jiraguha/deno-script/master/install.sh" | bash -s "master" "bash"  
+
+```
+
+
 ## Script Input Modes
 The main mode of operation is `deno run <script>`.
 The <script> can be a Javascript *.js or Typescritpt *.ts file , a script URL, `-` for stdin, a process substitution file handle.

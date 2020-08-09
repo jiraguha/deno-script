@@ -1,6 +1,11 @@
 #!/bin/bash
 
-DENO_SCRIPT_REF="master"
+if [ -z "$1" ]; then
+  DENO_SCRIPT_REF="master"
+else
+  DENO_SCRIPT_REF=$1
+fi
+DENO_SCRIPT_REF="$1"
 DENO_SCRIPT_HOME=~/.deno-script
 DENO_SCRIPT_BIN=~/.deno-script/bin
 DENO_SCRIPT_URL="https://raw.githubusercontent.com/jiraguha/deno-script/$DENO_SCRIPT_REF/deno-script.sh"
@@ -21,33 +26,44 @@ chmod u+x deno-script
 ZSHRC_LOCATION=~/.zshrc
 BASH_PROFILE_LOCATION=~/.bash_profile
 
-echo "[INFO] deno-script is partially installed with success.
-Please copy the line bellow in your <$ZSHRC_LOCATION> or <$BASH_PROFILE_LOCATION> to finish the installation:
 
-export DENO_SCRIPT_HOME=$DENO_SCRIPT_HOME
-export DENO_SCRIPT_BIN=$DENO_SCRIPT_BIN
-export PATH=\$PATH:\$DENO_SCRIPT_BIN
+if [ -z $2 ]; then
+  echo "[INFO] deno-script is partially installed with success.
+  Please copy the line bellow in your <$ZSHRC_LOCATION> or <$BASH_PROFILE_LOCATION> to finish the installation:
 
-"
+  export DENO_SCRIPT_HOME=$DENO_SCRIPT_HOME
+  export DENO_SCRIPT_BIN=$DENO_SCRIPT_BIN
+  export PATH=\$PATH:\$DENO_SCRIPT_BIN
 
-read -p "This can be done automatically for you? (yes|no) " AUTO_INSTALL_RESPONSE
+  "
+  read -p "This can be done automatically for you? (yes|no) " AUTO_INSTALL_RESPONSE
 
-if [[ $AUTO_INSTALL_RESPONSE == "no" ]]; then
+  if [[ $AUTO_INSTALL_RESPONSE == "no" ]]; then
     exit 0
+  fi
+
+  read -p "What shell do you use? (bash|zsh) " SHELL_RESPONSE
+  echo "[INFO] Appending env variable and bin path..."
+else
+  SHELL_RESPONSE=$2
+  echo "[INFO] Appending env variable and bin path:
+    export DENO_SCRIPT_HOME=$DENO_SCRIPT_HOME
+    export DENO_SCRIPT_BIN=$DENO_SCRIPT_BIN
+    export PATH=\$PATH:\$DENO_SCRIPT_BIN
+  "
 fi
 
-read -p "What shell do you use? (bash|zsh) " SHELL_RESPONSE
 
 
 if [[ $SHELL_RESPONSE == "zsh" ]]; then
-  echo "[INFO] Appending env variable and bin path to $ZSHRC_LOCATION"
+  echo " ---   to $ZSHRC_LOCATION"
   echo "
 export DENO_SCRIPT_HOME=$DENO_SCRIPT_HOME
 export DENO_SCRIPT_BIN=$DENO_SCRIPT_BIN
 export PATH=\$PATH:\$DENO_SCRIPT_BIN
 " >> $ZSHRC_LOCATION
 elif [[ $SHELL_RESPONSE == "bash" ]]; then
-  echo "[INFO] Appending env variable and bin path to $BASH_PROFILE_LOCATION"
+  echo " ---   to $BASH_PROFILE_LOCATION"
   echo "
 export DENO_SCRIPT_HOME=$DENO_SCRIPT_HOME
 export DENO_SCRIPT_BIN=$DENO_SCRIPT_BIN
