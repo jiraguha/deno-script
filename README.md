@@ -1,8 +1,9 @@
 # deno-script 🦕
+Enhanced scripting support for JavaScript/TypeScript with Deno 🦕 on *nix-based systems.
+
 [![Maturity badge - Experimental](https://img.shields.io/badge/Maturity-Experimental-yellow.svg)](https://github.com/jiraguha/deno-script/blob/master/maturity.md)
 
-
-Enhanced scripting support for JavaScript/TypeScript with Deno 🦕 on *nix-based systems.
+---
 
 It is largely inspired by [kscript](https://github.com/holgerbrandl/kscript). The idea is to leverage the scripting abilities of javascript using [Deno](https://deno.land/).  
 
@@ -14,9 +15,14 @@ I feel that scripting can be so much fun with `Deno` as:
 - It is much more that `Node`
 
 ## Requirement
-- Installing deno.
 - Os: Mac, linux
+- [Installing deno](https://deno.land/#installation)
 - Make sure that Deno is on the bin path
+If you `homebrew` the last point should be done automatically. If not, make sure to manually add them to your bash_profile (or similar)
+```
+export DENO_INSTALL="$HOME/.deno"
+export PATH=$PATH:$DENO_INSTALL/bin
+```
 ## Installation
 
 If your are on `zsh`:
