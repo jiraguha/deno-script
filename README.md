@@ -20,13 +20,13 @@ I feel that scripting can be so much fun with `Deno` as:
 ## Installation
 
 If your are on `zsh`:
-```
+```shell
 curl -sSL "https://raw.githubusercontent.com/jiraguha/deno-script/master/install.sh" | bash -s "master" "zsh" 
 
 ```
 
 For others:
-```
+```shell
 curl -sSL "https://raw.githubusercontent.com/jiraguha/deno-script/master/install.sh" | bash -s "master" "bash"  
 
 ```
@@ -37,17 +37,7 @@ The main mode of operation is `deno run <script>`.
 The <script> can be a Javascript *.js or Typescritpt *.ts file , a script URL, `-` for stdin, a process substitution file handle.
 ### Interpreter Usage
 To use Deno as interpreter for a script:
-- create an executable in the bin directory `/usr/local/bin` called `deno-script`(call it as you want)
-```shell
-#!/bin/bash
-#In deno-script
-deno run $@
-```
-Make it executable
-```
-$ chmod u+x deno-script;
-```
-- Now when create a script just point to`deno-script` in the shebang line of your scripts:
+- Just create a script just point to`deno-script` in the shebang line of your scripts:
 ```js
 #!/usr/bin/env deno-script
 // In hello.js
@@ -57,19 +47,19 @@ for (let arg of Deno.args) {
 }
 ```
 Make it executable
-```
+```shell
 $ chmod u+x hello.js;
 ```
 Execute it
-```
+```shell
 $ ./hello.js;
 ```
 
-You can me a similar script doing the `ls`job using Deno API’s!
+You can make a similar script doing the `ls`job using Deno API’s!
 
 ```js
 #!/bin/bash deno-script
-
+// In hello.js
 for (const dirEntry of Deno.readDirSync("./")) {
       console.log(dirEntry.name);
 }
@@ -82,14 +72,14 @@ error: Uncaught PermissionDenied: read access to "./", run again with the --allo
     at unwrapResponse (rt/10_dispatch_json.js:25:13)
     at sendSync (rt/10_dispatch_json.js:52:12)
     at Object.readDirSync (rt/30_fs.js:105:16)
-    at file:///Users/jpi/dev/deno/deno-ls.js:3:29
+    at file:///Users/jpi/dev/deno/deno-ls-like.js:3:29
 ```
 
-This is were Deno shine! Deno will not you implicitly have access to to your directories. You need to explicitly ask the permission to Deno.
+This is were Deno shine! Deno will not let you implicitly have access to your directories. You need to explicitly ask the permission to Deno.
 
 Your could specify it in the shebang:
 
-```
+```shell
 #!/bin/bash deno-script --allow-read
 ```
 
@@ -98,40 +88,25 @@ For more about Deno security go [here](https://deno.land/manual/getting_started/
 ### Inlined Usage
 To use kscript in a workflow without creating an additional script file, you can also use one of its supported modes for /inlined usage/. 
 
-For the we will modify `deno-script` a bit
-
-```shell
-#!/bin/bash
-if [[ $1 =~ (--inline|-i) ]]; then
-    deno run <(echo $2) "${@:3}"
-elif [[ $1 =~ (--pipe|-p) ]]; then
-    while read arg; do
-        deno run <(echo $2) "$arg"
-    done
-else
-    deno run $@
-fi
-```
-
 The following modes are supported:
 
 - Directly provide a js scriptlet as argument
-```
+```shell
 $ deno-script -i "console.log('hello', Deno.args[0])" JP
 ```
 I can use pipe with it
-```
+```shell
  ls | xargs -L 1 deno-script -i 'console.log(`file:   ${Deno.args[0]}`)'
 ```
   `-L 1` of options of `xargs` is to manage the execution of each stream pipe elements ([see](https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input))
 
 You could get the same result with `-p`of `--p` option
-```
+```shell
 ls -la | deno-script -p "console.log('hello', Deno.args[0])"
 ```
 
 You can manage  several arguments
-```
+```shell
 deno-script -i '
 for (let arg of Deno.args) {
     console.log(`arg: ${arg}`)
@@ -139,13 +114,13 @@ for (let arg of Deno.args) {
 ```
 
 - Pipe a js snippet into Deno and instruct it to read from stdin by using - as script argument
-```
+```shell
 echo '
 console.log("hello world")
 ' | deno-script -
 ```
 - Using heredoc (preferred solution for inlining) which gives you some more flexibility to also use single quotes in your script:
-```
+```shell
 deno-script - <<"EOF"
 console.log("It's a beautiful day!")
 EOF
@@ -159,8 +134,43 @@ deno-script - <<"EOF"
 EOF
 ```
 
+### Read Usage
 
-We could continue and do much more…
+The `colors.txt` used here is available [here](https://raw.githubusercontent.com/jiraguha/deno-script/master/examples/colors.txt)
+- read a file line by line
+```shell
+ deno-script --read-file-line "console.log(line.split(';')[0])" colors.txt
+
+```
+`line` give access to each line
+
+- read a file as an all
+```shell
+ deno-script --read-file "console.log(lines[0])" colors.txt
+```
+`lines` give access to all lines in iterable
+
+
+- read a text line by line
+```shell
+ deno-script --read-text-line "console.log(line.split(';')[1])" \
+"Viridian; #40826D; 64; 130; 109; 161; 51; 38
+        Violet; #7F00FF; 127; 0; 255; 270; 100; 50
+        Ultramarine; #3F00FF; 63; 0; 255; 255; 100; 50
+        Turquoise; #40E0D0; 64; 224; 208; 174; 71; 56
+        Teal; #008080; 0; 128; 128; 180; 100; 25"
+```
+
+OR 
+
+```shell
+cat colors.txt | xargs -0 deno-script --read-text-line "console.log(line.split(';')[1])" 
+```
+
+- read a text as an all
+```shell
+cat colors.txt | xargs -0 deno-script --read-text "console.log(lines[3])" 
+```shell
 
 
 **Developed for 🦕 with ❤️**
