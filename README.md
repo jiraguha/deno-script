@@ -17,9 +17,9 @@ I feel that scripting can be so much fun with `Deno` as:
 ## Requirement
 - Os: Mac, linux
 - [Installing deno](https://deno.land/#installation)
-- Make sure that Deno is on the bin path
-If you `homebrew` the last point should be done automatically. If not, make sure to manually add them to your bash_profile (or similar)
+- Make sure that Deno is on the bin path. If you `homebrew` the last point should be done automatically. If not, make sure to manually add them to your `.bash_profile` (or similar)... see bellow!
 ```
+# Add this to your .bash_profile
 export DENO_INSTALL="$HOME/.deno"
 export PATH=$PATH:$DENO_INSTALL/bin
 ```
