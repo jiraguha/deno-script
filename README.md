@@ -106,7 +106,7 @@ I can use pipe with it
 ```
   `-L 1` of options of `xargs` is to manage the execution of each stream pipe elements ([see](https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input))
 
-You could get the same result with `-p`of `--p` option
+You could get the same result with `-p`of `--pipe` option
 ```shell
 ls -la | deno-script -p "console.log('hello', Deno.args[0])"
 ```
