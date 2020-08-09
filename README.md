@@ -77,7 +77,7 @@ error: Uncaught PermissionDenied: read access to "./", run again with the --allo
 
 This is were Deno shine! Deno will not let you implicitly have access to your directories. You need to explicitly ask the permission to Deno.
 
-Your could specify it in the shebang:
+You could specify it in the shebang:
 
 ```shell
 #!/bin/bash deno-script --allow-read
