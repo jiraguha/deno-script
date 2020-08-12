@@ -40,7 +40,7 @@ curl -sSL "https://raw.githubusercontent.com/jiraguha/deno-script/master/install
 
 ## Script Input Modes
 The main mode of operation is `deno run <script>`.
-The <script> can be a Javascript *.js or Typescritpt *.ts file , a script URL, `-` for stdin, a process substitution file handle.
+The <script> can be a Javascript *.js or Typescript *.ts file , a script URL, `-` for stdin, a process substitution file handle.
 ### Interpreter Usage
 To use Deno as interpreter for a script:
 - Just create a script just point to`deno-script` in the shebang line of your scripts:
