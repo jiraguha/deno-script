@@ -5,10 +5,10 @@ for (let arg of Deno.args) {
     console.log(`arg: ${arg}`)
 }
 
-async function ofside(it){
+async function ofside(it) {
     const result = [];
     for await (const value of it) {
-    result.push(value);
+      result.push(value);
     }
     return result;
 }
@@ -18,4 +18,4 @@ let dirs = ofside(Deno.readDir("./"))
               result.forEach(element => {
                   console.log(element.name)
               });
-          })
+          });
