@@ -108,9 +108,9 @@ I can use pipe with it
 
 You could get the same result with `-p`of `--pipe` option
 ```shell
-ls -la | deno-script -p "console.log('hello', Deno.args[0])"
+ls -la | deno-script -p "console.log('hello', line)"
 ```
-`line` give access to each line.
+`line` give access to the stdin stream of the pipe.
 
 You can manage  several arguments:
 ```shell
