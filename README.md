@@ -110,8 +110,9 @@ You could get the same result with `-p`of `--pipe` option
 ```shell
 ls -la | deno-script -p "console.log('hello', Deno.args[0])"
 ```
+`line` give access to each line.
 
-You can manage  several arguments
+You can manage  several arguments:
 ```shell
 deno-script -i '
 for (let arg of Deno.args) {
