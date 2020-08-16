@@ -83,6 +83,14 @@ inline(){
   deno run --allow-read $permissionCatch <(echo "$2") "${@:3}"
 }
 
+pipe(){
+  deno run $permissionCatch <(echo "
+    import {readLines} from $BUFIO_LIB;
+    for await (const line of readLines(Deno.stdin)) {
+      $1
+    }
+  ")
+}
 #======================
 # Options handler
 #======================
@@ -91,10 +99,7 @@ handleOptions(){
   if [[ $1 =~ (--inline|-i) ]]; then
     inline "$@"
   elif [[ $1 =~ (--pipe|-p) ]]; then
-    #fixme: use deno stdin
-    while read arg; do
-        deno run <(echo "$2") "$arg"
-    done
+    pipe "$2"
   elif [[ $1 =~ --read-file-line ]]; then
     readFileLine "$@"
   elif [[ $1 =~ --read-file ]]; then
