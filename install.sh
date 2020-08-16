@@ -26,7 +26,6 @@ chmod u+x deno-script
 ZSHRC_LOCATION=~/.zshrc
 BASH_PROFILE_LOCATION=~/.bash_profile
 
-
 if [ -z $2 ]; then
   echo "[INFO] deno-script is partially installed with success.
   Please copy the line bellow in your <$ZSHRC_LOCATION> or <$BASH_PROFILE_LOCATION> to finish the installation:
@@ -53,22 +52,20 @@ else
   "
 fi
 
-
-
 if [[ $SHELL_RESPONSE == "zsh" ]]; then
   echo " ---   to $ZSHRC_LOCATION"
   echo "
 export DENO_SCRIPT_HOME=$DENO_SCRIPT_HOME
 export DENO_SCRIPT_BIN=$DENO_SCRIPT_BIN
 export PATH=\$PATH:\$DENO_SCRIPT_BIN
-" >> $ZSHRC_LOCATION
+" >>$ZSHRC_LOCATION
 elif [[ $SHELL_RESPONSE == "bash" ]]; then
   echo " ---   to $BASH_PROFILE_LOCATION"
   echo "
 export DENO_SCRIPT_HOME=$DENO_SCRIPT_HOME
 export DENO_SCRIPT_BIN=$DENO_SCRIPT_BIN
 export PATH=\$PATH:\$DENO_SCRIPT_BIN
-" >> $BASH_PROFILE_LOCATION
+" >>$BASH_PROFILE_LOCATION
   source $BASH_PROFILE_LOCATION
 else
   echo "[ERROR] You response is not support"
