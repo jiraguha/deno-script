@@ -79,7 +79,7 @@ readFileLine() {
 }
 
 inline() {
-  deno run --allow-read $permissionCatch <(echo "$2") "${@:3}"
+  deno run $permissionCatch <(echo "$2") "${@:3}"
 }
 
 pipe() {
@@ -111,12 +111,25 @@ handleOptions() {
 }
 
 #============================
+# Main function
+#============================
+
+main(){
+  handleArguments "$@"
+  if [[ $optionDetected ]]; then
+    handleOptions "${tailedArgArray[@]}"
+  else
+    deno run "$@"
+  fi
+}
+
+#============================
 # Main script
 #============================
 
-handleArguments "$@"
-if [[ $optionDetected ]]; then
-  handleOptions "${tailedArgArray[@]}"
+if [[ $@ =~ --test ]]; then
+  echo "[INFO] deno-script test mode was activated"
 else
-  deno run "$@"
+  main "$@"
 fi
+
