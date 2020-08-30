@@ -114,7 +114,7 @@ handleOptions() {
 # Main function
 #============================
 
-main(){
+main() {
   handleArguments "$@"
   if [[ $optionDetected ]]; then
     handleOptions "${tailedArgArray[@]}"
@@ -132,4 +132,3 @@ if [[ $@ =~ --test ]]; then
 else
   main "$@"
 fi
-
